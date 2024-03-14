@@ -1,4 +1,4 @@
-<p align="left"> #SQL Murder Mystery Solution </p>
+#SQL Murder Mystery Solution
 
 ###
 
