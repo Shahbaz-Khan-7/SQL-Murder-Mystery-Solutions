@@ -1,0 +1,54 @@
+-- Find out who the 2 witnesses are: 
+SELECT *
+FROM crime_scene_report
+WHERE type = 'murder'
+AND city = 'SQL City'
+AND date = 20180115;
+
+-- Write a query that identifies the first witness:
+Select * from person where address_street_name = 'Northwestern Dr' 
+ORDER BY address_number DESC
+LIMIT 1;
+
+--Write a query that identifies the second witness:
+Select * from person where name like 'Annabel%' and
+address_street_name = 'Franklin Ave'
+
+--Write a query that shows the interview transcripts for our two subjects:
+select name, transcript
+from interview i
+join person p
+on i.person_id = p.id
+where name = 'Morty Schapiro' or name = 'Annabel Miller';
+
+-- membership starts with "48Z" / gold member / License plate H42W 
+-- was at the gym jan 9th 
+-- Find the murderer: 
+select * 
+from get_fit_now_check_in gc
+join get_fit_now_member gm
+on gc.membership_id = gm.id
+join person p
+on gm.person_id = p.id
+join drivers_license dl
+on p.license_id = dl.id
+where gm.id like '%48z%' and 
+check_in_date = '20180109' and plate_number like '%H42W%'
+
+--Read transcript find real murderer: 
+select name, transcript
+from interview i
+join person p
+on i.person_id = p.id
+where name = 'Jeremy Bowers'
+
+-- woman / height = 67 or 65 / red hair / drives tesla 
+-- went to sql symphony concert 3 times in december 2017 
+select *
+from facebook_event_checkin fb
+join person p
+on fb.person_id = p.id
+join drivers_license dl
+on p.license_id = dl.id
+where dl.hair_color = 'red' and 
+dl.car_make = 'Tesla' and dl.gender = 'female'
